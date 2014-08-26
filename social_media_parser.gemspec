@@ -20,4 +20,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "public_suffix", "~> 1.4.5"
 
   spec.add_development_dependency "rspec", "~> 3.0.0"
+  spec.add_development_dependency "pry"
 end
