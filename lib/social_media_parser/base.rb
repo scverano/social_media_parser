@@ -19,7 +19,7 @@ module SocialMediaParser
 
     def url
       if whitelist_provider?
-        validate_url || provider_url_from_username_or_url
+        validate_url || profile_url_from_username_or_url
       else
         validate_url
       end
@@ -30,7 +30,7 @@ module SocialMediaParser
         if validate_url
           username_from_url
         else
-          profile_attributes[:username] || profile_attributes[:url]
+          username_from_attributes
         end
       end
     end
@@ -48,13 +48,21 @@ module SocialMediaParser
     def validate_url
       uri = URI.parse(profile_attributes[:url])
       return uri.to_s if %w(http https).include?(uri.scheme)
-      return "http://#{profile_attributes[:url]}" if PublicSuffix.valid?(URI.parse("http://#{profile_attributes[:url]}").host)
+      return "http://#{url_from_attributes}" if PublicSuffix.valid?(URI.parse("http://#{url_from_attributes}").host)
     rescue URI::BadURIError, URI::InvalidURIError
       nil
     end
 
-    def provider_url_from_username_or_url
-      "https://#{provider}.com/#{profile_attributes[:username] || profile_attributes[:url]}"
+    def profile_url_from_username_or_url
+      "https://#{provider}.com/#{username_from_attributes}" if username_from_attributes
+    end
+
+    def url_from_attributes
+      profile_attributes[:url] || profile_attributes[:url_or_username]
+    end
+
+    def username_from_attributes
+      profile_attributes[:username] || profile_attributes[:url_or_username]
     end
 
     def username_from_url
