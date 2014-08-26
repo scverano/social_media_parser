@@ -1,5 +1,7 @@
-require "social_media_parser/version"
+require 'social_media_parser/base'
 
 module SocialMediaParser
-  # Your code goes here...
+  def self.parse(profile_attributes)
+    Base.new(profile_attributes)
+  end
 end
