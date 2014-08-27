@@ -17,13 +17,23 @@ describe SocialMediaParser::Base do
         end
       end
 
-      context "with twitter as provider and username as url" do
-        let(:profile_attributes){ {url: "hodor", provider: 'twitter'} }
+      context "with twitter as provider and username as url_or_username" do
+        let(:profile_attributes){ {url_or_username: "hodor", provider: 'twitter'} }
 
         it "returns the parsed attributes" do
           expect(result[:url]).to eq "https://twitter.com/hodor"
           expect(result[:provider]).to eq "twitter"
           expect(result[:username]).to eq "hodor"
+        end
+      end
+
+      context "with twitter as provider and username as url" do
+        let(:profile_attributes){ {url: "hodor", provider: 'twitter'} }
+
+        it "returns the parsed attributes" do
+          expect(result[:url]).to eq nil
+          expect(result[:provider]).to eq "twitter"
+          expect(result[:username]).to eq nil
         end
       end
 
@@ -57,8 +67,8 @@ describe SocialMediaParser::Base do
         end
       end
 
-      context "with facebook username as url and provider" do
-        let(:profile_attributes){ {url: "john.snow", provider: 'facebook'} }
+      context "with facebook username as url_or_username and provider" do
+        let(:profile_attributes){ {url_or_username: "john.snow", provider: 'facebook'} }
 
         it "returns the facebook profile url" do
           expect(result[:url]).to eq "https://facebook.com/john.snow"
