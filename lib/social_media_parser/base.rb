@@ -18,20 +18,12 @@ module SocialMediaParser
     end
 
     def url
-      if whitelist_provider?
-        validate_url || profile_url_from_username_or_url
-      else
-        validate_url
-      end
+      validate_url || profile_url_from_username_or_url
     end
 
     def username
       if whitelist_provider?
-        if validate_url
-          username_from_url
-        else
-          username_from_attributes
-        end
+        username_from_url || username_from_attributes
       end
     end
 
@@ -54,7 +46,9 @@ module SocialMediaParser
     end
 
     def profile_url_from_username_or_url
-      "https://#{provider}.com/#{username_from_attributes}" if username_from_attributes
+      if username_from_attributes && whitelist_provider?
+        "https://#{provider}.com/#{username_from_attributes}" 
+      end
     end
 
     def url_from_attributes
@@ -71,7 +65,7 @@ module SocialMediaParser
         URI.parse(validate_url).path.split("/")[1]
       when 'facebook'
         FACEBOOK_URL_REGEX.match(validate_url)[1]
-      end
+      end if validate_url
     end
   end
 end
