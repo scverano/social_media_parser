@@ -3,7 +3,7 @@ module SocialMediaParser
     attr_accessor :profile_attributes
 
     WHITELIST_PROVIDERS = ['twitter', 'facebook', 'pinterest', 'instagram', 'github']
-    FACEBOOK_URL_REGEX = /(?:(?:http|https):\/\/)?(?:www.)?facebook.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[?\w\-]*\/)?(?:profile.php\?id=(?=\d.*))?([\w\-]*)?/
+    FACEBOOK_URL_REGEX = /(?:(?:http|https):\/\/)?(?:www.)?facebook.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[?\w\-]*\/)?(?:profile.php\?id=(?=\d.*))?([\w\-\.]*)?/
 
     def initialize(profile_attributes)
       @profile_attributes = profile_attributes
@@ -34,11 +34,13 @@ module SocialMediaParser
     private
 
     def whitelist_provider?
-      WHITELIST_PROVIDERS.include? profile_attributes[:provider]
+      if provider = profile_attributes[:provider]
+        WHITELIST_PROVIDERS.include? provider.downcase
+      end
     end
 
     def validate_url
-      uri = URI.parse(profile_attributes[:url])
+      uri = URI.parse(url_from_attributes)
       return uri.to_s if %w(http https).include?(uri.scheme)
       return "http://#{url_from_attributes}" if PublicSuffix.valid?(URI.parse("http://#{url_from_attributes}").host)
     rescue URI::BadURIError, URI::InvalidURIError

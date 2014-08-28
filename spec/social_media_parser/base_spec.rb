@@ -77,6 +77,16 @@ describe SocialMediaParser::Base do
         end
       end
 
+      context "with facebook http url as url_or_username and case insensitive provider" do
+        let(:profile_attributes){ {url_or_username: "http://www.facebook.com/john.snow", provider: 'Facebook'} }
+
+        it "returns the facebook profile url" do
+          expect(result[:url]).to eq "http://www.facebook.com/john.snow"
+          expect(result[:provider]).to eq "facebook"
+          expect(result[:username]).to eq "john.snow"
+        end
+      end
+
       context "with an unkown provider" do
         let(:profile_attributes){ {url: "http://unknown.com/john_snow", provider: "unknown", username: "john_snow"} }
 
