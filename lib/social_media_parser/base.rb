@@ -4,8 +4,9 @@ module SocialMediaParser
   class Base
     attr_accessor :profile_attributes
 
-    WHITELIST_PROVIDERS = ['twitter', 'facebook', 'pinterest', 'instagram', 'github']
+    WHITELIST_PROVIDERS = ['twitter', 'facebook', 'pinterest', 'instagram', 'github', 'youtube']
     FACEBOOK_URL_REGEX = /(?:(?:http|https):\/\/)?(?:www.)?facebook.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[?\w\-]*\/)?(?:profile.php\?id=(?=\d.*))?([\w\-\.]*)?/
+    YOUTUBE_URL_REGEX = /(?:(?:http|https):\/\/)?(?:www.)?youtube\.com\/(channel\/|user\/|)([a-zA-Z0-9]{1,})/
 
     def initialize(profile_attributes)
       @profile_attributes = profile_attributes
@@ -69,6 +70,8 @@ module SocialMediaParser
         URI.parse(validate_url).path.split("/")[1]
       when 'facebook'
         FACEBOOK_URL_REGEX.match(validate_url)[1]
+      when 'youtube'
+        YOUTUBE_URL_REGEX.match(validate_url)[2]
       end if validate_url
     end
   end

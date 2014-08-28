@@ -77,6 +77,16 @@ describe SocialMediaParser::Base do
         end
       end
 
+      context "with youtube as url_or_username and provider" do
+        let(:profile_attributes){ {url_or_username: "TeamCoco", provider: 'youtube'} }
+
+        it "returns the facebook profile url" do
+          expect(result[:url]).to eq "https://youtube.com/TeamCoco"
+          expect(result[:provider]).to eq "youtube"
+          expect(result[:username]).to eq "TeamCoco"
+        end
+      end
+
       context "with facebook http url as url_or_username and case insensitive provider" do
         let(:profile_attributes){ {url_or_username: "http://www.facebook.com/john.snow", provider: 'Facebook'} }
 
@@ -130,6 +140,24 @@ describe SocialMediaParser::Base do
 
         it "returns the url with http" do
           expect(parser.url).to eq "http://url.com/epic/lol"
+        end
+      end
+    end
+
+    context "#username" do
+      context "facebook" do
+        let(:profile_attributes){ {provider: "facebook", url: "https://www.facebook.com/teamcoco"} }
+
+        it "parses username correctly" do
+          expect(parser.username).to eq "teamcoco"
+        end
+      end
+
+      context "youtube" do
+        let(:profile_attributes){ {provider: "youtube", url: "https://www.youtube.com/user/teamcoco"} }
+
+        it "parses username correctly" do
+          expect(parser.username).to eq "teamcoco"
         end
       end
     end
