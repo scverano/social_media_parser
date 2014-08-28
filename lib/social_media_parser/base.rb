@@ -3,7 +3,7 @@ module SocialMediaParser
     attr_accessor :profile_attributes
 
     WHITELIST_PROVIDERS = ['twitter', 'facebook', 'pinterest', 'instagram', 'github']
-    FACEBOOK_URL_REGEX = /(?:(?:http|https):\/\/)?(?:www.)?facebook.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[?\w\-]*\/)?(?:profile.php\?id=(?=\d.*))?([\w\-]*)?/
+    FACEBOOK_URL_REGEX = /(?:(?:http|https):\/\/)?(?:www.)?facebook.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[?\w\-]*\/)?(?:profile.php\?id=(?=\d.*))?([\w\-\.]*)?/
 
     def initialize(profile_attributes)
       @profile_attributes = profile_attributes
