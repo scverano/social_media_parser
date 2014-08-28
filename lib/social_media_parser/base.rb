@@ -1,3 +1,5 @@
+require 'public_suffix'
+
 module SocialMediaParser
   class Base
     attr_accessor :profile_attributes
