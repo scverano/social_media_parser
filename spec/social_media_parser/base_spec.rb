@@ -97,6 +97,16 @@ describe SocialMediaParser::Base do
         end
       end
 
+      context "with google plus url as url_or_username" do
+        let(:profile_attributes){ {url_or_username: "https://plus.google.com/+TeamCoco/posts", provider: 'google'} }
+
+        it "returns the facebook profile url" do
+          expect(result[:url]).to eq "https://plus.google.com/+TeamCoco/posts"
+          expect(result[:provider]).to eq "google"
+          expect(result[:username]).to eq "TeamCoco"
+        end
+      end
+
       context "with an unkown provider" do
         let(:profile_attributes){ {url: "http://unknown.com/john_snow", provider: "unknown", username: "john_snow"} }
 
@@ -158,6 +168,14 @@ describe SocialMediaParser::Base do
 
         it "parses username correctly" do
           expect(parser.username).to eq "teamcoco"
+        end
+      end
+
+      context "google plus" do
+        let(:profile_attributes){ {provider: "google", url: "http://plus.google.com/+WilliamShatner"} }
+
+        it "parses username correctly" do
+          expect(parser.username).to eq "WilliamShatner"
         end
       end
     end

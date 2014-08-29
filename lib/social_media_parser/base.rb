@@ -4,9 +4,10 @@ module SocialMediaParser
   class Base
     attr_accessor :profile_attributes
 
-    WHITELIST_PROVIDERS = ['twitter', 'facebook', 'pinterest', 'instagram', 'github', 'youtube']
+    WHITELIST_PROVIDERS = ['twitter', 'facebook', 'pinterest', 'instagram', 'github', 'youtube', 'google']
     FACEBOOK_URL_REGEX = /(?:(?:http|https):\/\/)?(?:www.)?facebook.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[?\w\-]*\/)?(?:profile.php\?id=(?=\d.*))?([\w\-\.]*)?/
-    YOUTUBE_URL_REGEX = /(?:(?:http|https):\/\/)?(?:www.)?youtube\.com\/(channel\/|user\/|)([a-zA-Z0-9]{1,})/
+    YOUTUBE_URL_REGEX = /(?:(?:http|https):\/\/)?(?:www.)?youtube\.com\/(channel\/|user\/|)([\w\-\.]{1,})/
+    GOOGLE_PLUS_URL_REGEX = /(?:(?:http|https):\/\/)plus.google.com\/?(u\/\d{1,}\/|)(\+|)([\w\-\.]{1,})/
 
     def initialize(profile_attributes)
       @profile_attributes = profile_attributes
@@ -52,7 +53,13 @@ module SocialMediaParser
 
     def profile_url_from_username_or_url
       if username_from_attributes && whitelist_provider?
-        "https://#{provider}.com/#{username_from_attributes}" 
+        case provider
+        when 'google'
+          "https://plus.google.com/#{username_from_attributes}" if Float(username_from_attributes) rescue
+            "https://plus.google.com/+#{username_from_attributes}"
+        else
+          "https://#{provider}.com/#{username_from_attributes}"
+        end
       end
     end
 
@@ -72,6 +79,8 @@ module SocialMediaParser
         FACEBOOK_URL_REGEX.match(validate_url)[1]
       when 'youtube'
         YOUTUBE_URL_REGEX.match(validate_url)[2]
+      when 'google'
+        GOOGLE_PLUS_URL_REGEX.match(validate_url)[3]
       end if validate_url
     end
   end
