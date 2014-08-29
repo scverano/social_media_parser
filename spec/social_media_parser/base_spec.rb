@@ -18,40 +18,6 @@ describe SocialMediaParser::Base do
       end
     end
 
-    context "twitter" do
-      let(:result){ described_class.new(profile_attributes).attributes }
-
-      context "with twitter as provider and username as url_or_username" do
-        let(:profile_attributes){ {url_or_username: "hodor", provider: "twitter"} }
-
-        it "returns the parsed attributes" do
-          expect(result[:url]).to eq "https://twitter.com/hodor"
-          expect(result[:provider]).to eq "twitter"
-          expect(result[:username]).to eq "hodor"
-        end
-      end
-
-      context "with twitter as provider and username as url" do
-        let(:profile_attributes){ {url: "hodor", provider: "twitter"} }
-
-        it "returns the parsed attributes" do
-          expect(result[:url]).to eq nil
-          expect(result[:provider]).to eq "twitter"
-          expect(result[:username]).to eq nil
-        end
-      end
-
-      context "with twitter url and provider" do
-        let(:profile_attributes){ {url: "https://twitter.com/john_snow", provider: "twitter"} }
-
-        it "returns the parsed attributes" do
-          expect(result[:url]).to eq "https://twitter.com/john_snow"
-          expect(result[:provider]).to eq "twitter"
-          expect(result[:username]).to eq "john_snow"
-        end
-      end
-    end
-
     context "facebook" do
       let(:result){ described_class.new(profile_attributes).attributes }
 
@@ -96,26 +62,36 @@ describe SocialMediaParser::Base do
       end
     end
 
-    context "youtube" do
+    context "github" do
       let(:result){ described_class.new(profile_attributes).attributes }
 
-      context "with username and provider" do
-        let(:profile_attributes){ {username: "TeamCoco", provider: "youtube"} }
+      context "with github url and provider" do
+        let(:profile_attributes){ {url: "https://github.com/mnddev", provider: "github"} }
 
         it "returns the parsed attributes" do
-          expect(result[:url]).to eq "https://youtube.com/TeamCoco"
-          expect(result[:provider]).to eq "youtube"
-          expect(result[:username]).to eq "TeamCoco"
+          expect(result[:url]).to eq "https://github.com/mnddev"
+          expect(result[:provider]).to eq "github"
+          expect(result[:username]).to eq "mnddev"
         end
       end
 
-      context "with username as url_or_username and provider" do
-        let(:profile_attributes){ {url_or_username: "TeamCoco", provider: "youtube"} }
+      context "with github as provider and username as url_or_username" do
+        let(:profile_attributes){ {url_or_username: "mnddev", provider: "github"} }
 
         it "returns the parsed attributes" do
-          expect(result[:url]).to eq "https://youtube.com/TeamCoco"
-          expect(result[:provider]).to eq "youtube"
-          expect(result[:username]).to eq "TeamCoco"
+          expect(result[:url]).to eq "https://github.com/mnddev"
+          expect(result[:provider]).to eq "github"
+          expect(result[:username]).to eq "mnddev"
+        end
+      end
+
+      context "with github as provider and username as url" do
+        let(:profile_attributes){ {url: "mnddev", provider: "github"} }
+
+        it "returns the parsed attributes" do
+          expect(result[:url]).to eq nil
+          expect(result[:provider]).to eq "github"
+          expect(result[:username]).to eq nil
         end
       end
     end
@@ -154,7 +130,133 @@ describe SocialMediaParser::Base do
       end
     end
 
-    context "with an unkown provider" do
+    context "instagram" do
+      let(:result){ described_class.new(profile_attributes).attributes }
+
+      context "with instagram url and provider" do
+        let(:profile_attributes){ {url: "https://instagram.com/jimmykimmellive", provider: "instagram"} }
+
+        it "returns the parsed attributes" do
+          expect(result[:url]).to eq "https://instagram.com/jimmykimmellive"
+          expect(result[:provider]).to eq "instagram"
+          expect(result[:username]).to eq "jimmykimmellive"
+        end
+      end
+
+      context "with instagram as provider and username as url_or_username" do
+        let(:profile_attributes){ {url_or_username: "jimmykimmellive", provider: "instagram"} }
+
+        it "returns the parsed attributes" do
+          expect(result[:url]).to eq "https://instagram.com/jimmykimmellive"
+          expect(result[:provider]).to eq "instagram"
+          expect(result[:username]).to eq "jimmykimmellive"
+        end
+      end
+
+      context "with instagram as provider and username as url" do
+        let(:profile_attributes){ {url: "jimmykimmellive", provider: "instagram"} }
+
+        it "returns the parsed attributes" do
+          expect(result[:url]).to eq nil
+          expect(result[:provider]).to eq "instagram"
+          expect(result[:username]).to eq nil
+        end
+      end
+    end
+
+    context "pinterest" do
+      let(:result){ described_class.new(profile_attributes).attributes }
+
+      context "with pinterest url and provider" do
+        let(:profile_attributes){ {url: "https://pinterest.com/fallontonight", provider: "pinterest"} }
+
+        it "returns the parsed attributes" do
+          expect(result[:url]).to eq "https://pinterest.com/fallontonight"
+          expect(result[:provider]).to eq "pinterest"
+          expect(result[:username]).to eq "fallontonight"
+        end
+      end
+
+      context "with pinterest as provider and username as url_or_username" do
+        let(:profile_attributes){ {url_or_username: "fallontonight", provider: "pinterest"} }
+
+        it "returns the parsed attributes" do
+          expect(result[:url]).to eq "https://pinterest.com/fallontonight"
+          expect(result[:provider]).to eq "pinterest"
+          expect(result[:username]).to eq "fallontonight"
+        end
+      end
+
+      context "with pinterest as provider and username as url" do
+        let(:profile_attributes){ {url: "fallontonight", provider: "pinterest"} }
+
+        it "returns nil" do
+          expect(result[:url]).to eq nil
+          expect(result[:provider]).to eq "pinterest"
+          expect(result[:username]).to eq nil
+        end
+      end
+    end
+
+    context "twitter" do
+      let(:result){ described_class.new(profile_attributes).attributes }
+
+      context "with twitter as provider and username as url_or_username" do
+        let(:profile_attributes){ {url_or_username: "hodor", provider: "twitter"} }
+
+        it "returns the parsed attributes" do
+          expect(result[:url]).to eq "https://twitter.com/hodor"
+          expect(result[:provider]).to eq "twitter"
+          expect(result[:username]).to eq "hodor"
+        end
+      end
+
+      context "with twitter as provider and username as url" do
+        let(:profile_attributes){ {url: "hodor", provider: "twitter"} }
+
+        it "returns the parsed attributes" do
+          expect(result[:url]).to eq nil
+          expect(result[:provider]).to eq "twitter"
+          expect(result[:username]).to eq nil
+        end
+      end
+
+      context "with twitter url and provider" do
+        let(:profile_attributes){ {url: "https://twitter.com/john_snow", provider: "twitter"} }
+
+        it "returns the parsed attributes" do
+          expect(result[:url]).to eq "https://twitter.com/john_snow"
+          expect(result[:provider]).to eq "twitter"
+          expect(result[:username]).to eq "john_snow"
+        end
+      end
+    end
+
+    context "youtube" do
+      let(:result){ described_class.new(profile_attributes).attributes }
+
+      context "with username and provider" do
+        let(:profile_attributes){ {username: "TeamCoco", provider: "youtube"} }
+
+        it "returns the parsed attributes" do
+          expect(result[:url]).to eq "https://youtube.com/TeamCoco"
+          expect(result[:provider]).to eq "youtube"
+          expect(result[:username]).to eq "TeamCoco"
+        end
+      end
+
+      context "with username as url_or_username and provider" do
+        let(:profile_attributes){ {url_or_username: "TeamCoco", provider: "youtube"} }
+
+        it "returns the parsed attributes" do
+          expect(result[:url]).to eq "https://youtube.com/TeamCoco"
+          expect(result[:provider]).to eq "youtube"
+          expect(result[:username]).to eq "TeamCoco"
+        end
+      end
+    end
+
+    context "with an unknown provider" do
       let(:result){ described_class.new(profile_attributes).attributes }
       let(:profile_attributes){ {url: "http://unknown.com/john_snow", provider: "unknown", username: "john_snow"} }
 

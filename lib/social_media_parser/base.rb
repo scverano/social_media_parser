@@ -4,7 +4,7 @@ module SocialMediaParser
   class Base
     attr_accessor :profile_attributes
 
-    WHITELIST_PROVIDERS = ['twitter', 'facebook', 'pinterest', 'instagram', 'github', 'youtube', 'google']
+    WHITELIST_PROVIDERS = ['facebook', 'github', 'google', 'instagram', 'pinterest', 'twitter', 'youtube']
     FACEBOOK_URL_REGEX = /(?:(?:http|https):\/\/)?(?:www.)?facebook.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[?\w\-]*\/)?(?:profile.php\?id=(?=\d.*))?([\w\-\.]*)?/
     YOUTUBE_URL_REGEX = /(?:(?:http|https):\/\/)?(?:www.)?youtube\.com\/(channel\/|user\/|)([\w\-\.]{1,})/
     GOOGLE_PLUS_URL_REGEX = /(?:(?:http|https):\/\/)plus.google.com\/?(u\/\d{1,}\/|)(\+|)([\w\-\.]{1,})/
@@ -73,14 +73,14 @@ module SocialMediaParser
 
     def username_from_url
       case provider
-      when 'twitter', 'pinterest', 'instagram', 'github'
+      when 'github', 'instagram', 'pinterest', 'twitter'
         URI.parse(validate_url).path.split("/")[1]
       when 'facebook'
         FACEBOOK_URL_REGEX.match(validate_url)[1]
-      when 'youtube'
-        YOUTUBE_URL_REGEX.match(validate_url)[2]
       when 'google'
         GOOGLE_PLUS_URL_REGEX.match(validate_url)[3]
+      when 'youtube'
+        YOUTUBE_URL_REGEX.match(validate_url)[2]
       end if validate_url
     end
   end
