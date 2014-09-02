@@ -5,6 +5,9 @@ module SocialMediaParser
   PROVIDERS = ['facebook', 'github', 'google', 'instagram', 'pinterest', 'twitter', 'youtube']
 
   def self.parse(attrs)
+    if attrs.is_a? String
+      return parse(url: attrs)
+    end
     attrs = symbolize_keys attrs
 
     if provider = whitelist_provider(attrs[:provider])
