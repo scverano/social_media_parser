@@ -21,8 +21,8 @@ module SocialMediaParser
       end
 
       def valid?
-        @provider.to_s.match(/google/) or
-        (username and URI.parse(url_from_attributes).host.match("#{provider}.com"))
+        @provider == 'google' or
+        (username and URI.parse(url_from_attributes).host.match("plus.google.com"))
       end
 
       private
