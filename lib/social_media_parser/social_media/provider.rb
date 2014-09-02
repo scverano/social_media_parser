@@ -18,7 +18,7 @@ module SocialMediaParser
 
       def username
         return @username if @username
-        if @url_or_username and !valid_url_format(@url_or_username)
+        if @url_or_username and invalid_url_format? @url_or_username
           @url_or_username
         elsif url_from_attributes
           parse_username_from_url

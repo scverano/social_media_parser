@@ -43,5 +43,9 @@ module SocialMediaParser
     rescue URI::BadURIError, URI::InvalidURIError
       nil
     end
+
+    def invalid_url_format?(url)
+      !valid_url_format url
+    end
   end
 end
