@@ -1,8 +1,8 @@
-require 'social_media_parser/social_media/base'
+require 'social_media_parser/social_media/provider'
 
 module SocialMediaParser
   module SocialMedia
-    class Instagram < Base
+    class Instagram < Provider
 
       def provider
         'instagram'
