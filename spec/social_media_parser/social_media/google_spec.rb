@@ -32,4 +32,31 @@ describe SocialMediaParser do
       expect(parser.username).to eq "105063820137409755625"
     end
   end
+
+  context "url variations" do
+    it "parses username from url with trailing slash" do
+      parser = described_class.parse "plus.google.com/+TeamCoco/"
+      expect(parser.username).to eq "TeamCoco"
+    end
+
+    it "parses username from url without http" do
+      parser = described_class.parse "plus.google.com/+TeamCoco"
+      expect(parser.username).to eq "TeamCoco"
+    end
+
+    it "parses username from post url and multi user login" do
+      parser = described_class.parse "https://plus.google.com/u/1/+TeamCoco/posts/B1n3wkASqno"
+      expect(parser.username).to eq "TeamCoco"
+    end
+
+    it "parses username from photo url" do
+      parser = described_class.parse "https://plus.google.com/+TeamCoco/photos/photo/6049107252378797394?pid=6049107252378797394&oid=105163107119743094340"
+      expect(parser.username).to eq "TeamCoco"
+    end
+
+    it "parses username from multi user login and with special characters" do
+      parser = described_class.parse "https://plus.google.com/u/0/+KristoferBj%C3%B6rkman/posts"
+      expect(parser.username).to eq "KristoferBj%C3%B6rkman"
+    end
+  end
 end

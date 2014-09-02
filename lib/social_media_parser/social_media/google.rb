@@ -3,7 +3,7 @@ require 'social_media_parser/social_media/provider'
 module SocialMediaParser
   module SocialMedia
     class Google < Provider
-      URL_REGEX = /(?:(?:http|https):\/\/)plus.google.com\/?(u\/\d{1,}\/|)(\+|)([\w\-\.]{1,})/i
+      URL_REGEX = /(?:(?:http|https):\/\/)plus.google.com\/?(?:u\/\d{1,}\/|)(?:\+|)([\w\-\.\%]{1,})/i
 
       def provider
         'google'
@@ -28,7 +28,7 @@ module SocialMediaParser
       private
 
       def parse_username_from_url
-        URL_REGEX.match(url_from_attributes).to_a[3]
+        URL_REGEX.match(url_from_attributes).to_a[1]
       end
     end
   end
