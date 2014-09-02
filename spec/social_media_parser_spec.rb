@@ -23,5 +23,25 @@ describe SocialMediaParser do
         expect(described_class.parse(profile_attributes)).to be_a SocialMediaParser::SocialMedia::Twitter
       end
     end
+
+    describe "only passing in invalid url as url" do
+      let(:profile_attributes){ {url: "not a url"} }
+
+      it "returns nothing" do
+        parser = described_class.parse(profile_attributes)
+        expect(parser).to be_a SocialMediaParser::Link
+        expect(parser.url).to be_nil
+      end
+    end
+
+    describe "only passing in invalid url as url_or_username" do
+      let(:profile_attributes){ {url_or_username: "not a url"} }
+
+      it "returns nothing" do
+        parser = described_class.parse(profile_attributes)
+        expect(parser).to be_a SocialMediaParser::Link
+        expect(parser.url).to be_nil
+      end
+    end
   end
 end

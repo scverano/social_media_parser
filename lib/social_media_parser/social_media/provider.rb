@@ -33,6 +33,8 @@ module SocialMediaParser
       def valid?
         @provider == provider or
         (username and URI.parse(url_from_attributes).host.match("#{provider}.com"))
+      rescue URI::BadURIError, URI::InvalidURIError
+        false
       end
 
       private
@@ -42,6 +44,8 @@ module SocialMediaParser
       # doesn't look like this
       def parse_username_from_url
         URI.parse(url_from_attributes).path.split("/")[1]
+      rescue URI::BadURIError, URI::InvalidURIError
+        nil
       end
     end
   end
