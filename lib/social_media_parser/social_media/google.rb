@@ -20,11 +20,6 @@ module SocialMediaParser
         "https://plus.google.com/+#{username}"
       end
 
-      def valid?
-        @provider == 'google' or
-        (username and URI.parse(url_from_attributes).host.match("plus.google.com"))
-      end
-
       private
 
       def parse_username_from_url
