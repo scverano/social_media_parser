@@ -32,4 +32,26 @@ describe SocialMediaParser do
       expect(parser.username).to eq "fallontonight"
     end
   end
+
+  context "url variations" do
+    it "parses username from url without trailing slash" do
+      parser = described_class.parse "http://www.pinterest.com/marthastewart"
+      expect(parser.username).to eq "marthastewart"
+    end
+
+    it "parses username from url without www" do
+      parser = described_class.parse "http://pinterest.com/marthastewart/"
+      expect(parser.username).to eq "marthastewart"
+    end
+
+    it "parses username from pinterest pinboard url" do
+      parser = described_class.parse "http://www.pinterest.com/marthastewart/around-my-farm/"
+      expect(parser.username).to eq "marthastewart"
+    end
+
+    it "parses username from pinterest followers url" do
+      parser = described_class.parse "http://www.pinterest.com/marthastewart/followers/"
+      expect(parser.username).to eq "marthastewart"
+    end
+  end
 end
