@@ -2,8 +2,6 @@ require 'public_suffix'
 
 module SocialMediaParser
   class Link
-    attr_accessor :url, :url_or_username, :username, :provider
-
     def initialize(attrs)
       attrs.each do |k,v|
         instance_variable_set("@#{k}", v) unless v.nil?
