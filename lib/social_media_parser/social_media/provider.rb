@@ -6,14 +6,10 @@ module SocialMediaParser
       PROVIDERS = ['facebook', 'github', 'google', 'instagram', 'pinterest', 'twitter', 'youtube']
 
       def self.parse(attributes)
-        if PROVIDERS.include? attributes[:provider]
-          Object.const_get("SocialMediaParser").const_get("SocialMedia").const_get(attributes[:provider].capitalize).new(attributes)
-        else
-          PROVIDERS.map do |provider|
-            Object.const_get("SocialMediaParser").const_get("SocialMedia").const_get(provider.capitalize).new(attributes)
-          end.select(&:valid?).first or
-          ::SocialMediaParser::Link.new(attributes)
-        end
+        PROVIDERS.map do |provider|
+          Object.const_get("SocialMediaParser").const_get("SocialMedia").const_get(provider.capitalize).new(attributes)
+        end.select(&:valid?).first or
+        ::SocialMediaParser::Link.new(attributes)
       end
 
       def username
