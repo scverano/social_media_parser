@@ -43,11 +43,6 @@ module SocialMediaParser
       def parse_username_from_url
         URI.parse(url_from_attributes).path.split("/")[1]
       end
-
-      def url_from_attributes
-        return valid_url_format(@url) if valid_url_format(@url)
-        valid_url_format(@url_or_username) if valid_url_format(@url_or_username)
-      end
     end
   end
 end

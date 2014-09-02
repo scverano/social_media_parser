@@ -19,7 +19,7 @@ module SocialMediaParser
     end
 
     def url
-      valid_url_format(@url)
+      url_from_attributes
     end
 
     def attributes
@@ -31,6 +31,10 @@ module SocialMediaParser
     end
 
     private
+
+    def url_from_attributes
+      valid_url_format(@url) or valid_url_format(@url_or_username)
+    end
 
     def valid_url_format(url)
       uri = URI.parse(url)
