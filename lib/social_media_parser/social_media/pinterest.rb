@@ -1,8 +1,8 @@
-require 'social_media_parser/social_media/common'
+require 'social_media_parser/social_media/base'
 
 module SocialMediaParser
   module SocialMedia
-    class Pinterest < Common
+    class Pinterest < Base
 
       def provider
         'pinterest'

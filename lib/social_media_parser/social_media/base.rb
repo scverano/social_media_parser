@@ -2,7 +2,7 @@ require 'social_media_parser/link'
 
 module SocialMediaParser
   module SocialMedia
-    class Common < ::SocialMediaParser::Link
+    class Base < ::SocialMediaParser::Link
 
       def username
         return @username if @username

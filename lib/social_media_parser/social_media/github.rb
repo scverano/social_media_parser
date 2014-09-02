@@ -1,8 +1,8 @@
-require 'social_media_parser/social_media/common'
+require 'social_media_parser/social_media/base'
 
 module SocialMediaParser
   module SocialMedia
-    class Github < Common
+    class Github < Base
 
       def provider
         'github'

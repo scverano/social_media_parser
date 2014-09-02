@@ -1,8 +1,8 @@
-require 'social_media_parser/social_media/common'
+require 'social_media_parser/social_media/base'
 
 module SocialMediaParser
   module SocialMedia
-    class Google < Common
+    class Google < Base
       URL_REGEX = /(?:(?:http|https):\/\/)plus.google.com\/?(u\/\d{1,}\/|)(\+|)([\w\-\.]{1,})/i
 
       def provider
