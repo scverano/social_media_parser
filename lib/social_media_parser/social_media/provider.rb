@@ -27,7 +27,7 @@ module SocialMediaParser
       end
 
       def valid?
-        @provider == provider or
+        (@provider and @provider.downcase == provider) or
         (username and URI.parse(url_from_attributes).host.match("#{provider}.com"))
       rescue URI::BadURIError, URI::InvalidURIError
         false

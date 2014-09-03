@@ -9,7 +9,15 @@ describe SocialMediaParser do
     end
 
     describe "string key hash" do
-      let(:profile_attributes){ {"url" => "https://twitter.com/StephenAtHome", "provider" => 'twitter'} }
+      let(:profile_attributes){ {"url" => "https://twitter.com/StephenAtHome", "provider" => "twitter"} }
+
+      it "still works" do
+        expect(described_class.parse(profile_attributes)).to be_a SocialMediaParser::SocialMedia::Twitter
+      end
+    end
+
+    describe "camelized provider" do
+      let(:profile_attributes){ {"url" => "https://twitter.com/StephenAtHome", "provider" => "Twitter"} }
 
       it "still works" do
         expect(described_class.parse(profile_attributes)).to be_a SocialMediaParser::SocialMedia::Twitter
