@@ -34,8 +34,8 @@ describe SocialMediaParser do
   end
 
   context "url variations" do
-    it "parses username from url with trailing slash" do
-      parser = described_class.parse "https://twitter.com/TEDTalks/"
+    it "parses username from url without trailing slash" do
+      parser = described_class.parse "https://twitter.com/TEDTalks"
       expect(parser.username).to eq "TEDTalks"
     end
 
@@ -57,6 +57,18 @@ describe SocialMediaParser do
     it "parses username from twitter media url" do
       parser = described_class.parse "https://twitter.com/TEDTalks/media"
       expect(parser.username).to eq "TEDTalks"
+    end
+
+    context "old twitter urls" do
+      it "parses username from twitter profile page url" do
+        parser = described_class.parse "http://twitter.com/#!/johnnycullen"
+        expect(parser.username).to eq "johnnycullen"
+      end
+
+      it "parses username from tweet url" do
+        parser = described_class.parse "https://twitter.com/#!/JohnnyCullen/status/507124787546968064"
+        expect(parser.username).to eq "JohnnyCullen"
+      end
     end
   end
 end
