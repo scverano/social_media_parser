@@ -1,15 +1,11 @@
-require 'social_media_parser/base'
+require 'ostruct'
+Dir[File.join(File.dirname(__FILE__), 'social_media_parser', 'social_media', '*.rb')].each {|file| require file }
 
 module SocialMediaParser
-  def self.parse(profile_attributes)
-    Base.new(symbolize_keys(profile_attributes))
-  end
-
-  private
-
-  def self.symbolize_keys(hash)
-    new_hash = Hash.new
-    hash.each{|k,v| new_hash[k.to_sym] = v}
-    new_hash
+  def self.parse(attrs)
+    if attrs.is_a? String
+      return parse(url: attrs)
+    end
+    SocialMedia::Provider.parse(attrs)
   end
 end
