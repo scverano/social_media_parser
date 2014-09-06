@@ -3,6 +3,14 @@ require 'spec_helper'
 describe SocialMediaParser do
   let(:parser){ described_class.parse profile_attributes }
 
+  context "correct class" do
+    let(:profile_attributes) { {url: "https://www.twitter.com/TheDailyShow"} }
+
+    it "returns a Twitter object" do
+      expect(parser).to be_a SocialMediaParser::SocialMedia::Twitter
+    end
+  end
+
   context "with twitter as provider and username as url_or_username" do
     let(:profile_attributes){ {url_or_username: "TheDailyShow", provider: "twitter"} }
 

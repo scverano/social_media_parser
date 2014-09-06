@@ -3,7 +3,7 @@ require 'spec_helper'
 describe SocialMediaParser do
   let(:parser) { described_class.parse(profile_attributes) }
 
-  context "correct object" do
+  context "correct class" do
     let(:profile_attributes) { {url: "https://github.com/mynewsdesk"} }
 
     it "returns a Github object" do

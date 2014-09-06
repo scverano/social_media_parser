@@ -3,6 +3,14 @@ require 'spec_helper'
 describe SocialMediaParser do
   let(:parser) { described_class.parse(profile_attributes) }
 
+  context "correct class" do
+    let(:profile_attributes) { {url: "https://plus.google.com/+TeamCoco"} }
+
+    it "returns a Google object" do
+      expect(parser).to be_a SocialMediaParser::SocialMedia::Google
+    end
+  end
+
   context "with google plus url as url_or_username and provider" do
     let(:profile_attributes){ {url_or_username: "https://plus.google.com/+TeamCoco/posts", provider: "google"} }
 

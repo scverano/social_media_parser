@@ -3,7 +3,7 @@ require 'spec_helper'
 describe SocialMediaParser do
   let(:parser) { described_class.parse(profile_attributes) }
 
-  context "correct object" do
+  context "correct class" do
     let(:profile_attributes) { {url: "https://www.facebook.com/teamcoco"} }
 
     it "returns a Facebook object" do
