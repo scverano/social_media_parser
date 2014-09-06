@@ -6,7 +6,11 @@ module SocialMediaParser
       URL_REGEX = /(?:(?:http|https):\/\/)?(?:www.)?youtube\.com\/(?:user\/)([\w\-\.]{1,})/i
 
       def provider
-        'youtube'        
+        'youtube'
+      end
+
+      def url
+        "https://www.youtube.com/user/#{username}"
       end
 
       private
