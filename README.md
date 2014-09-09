@@ -1,6 +1,6 @@
 # SocialMediaParser
 
-Parse attributes for a social media profile.
+Parse social media attributes from url or construct url from attributes.
 
 ## Installation
 

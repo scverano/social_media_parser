@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = SocialMediaParser::VERSION
   spec.authors       = ["Markus Nordin", "Jonas Brusman", "Alexander Rothe"]
   spec.email         = ["dev@mynewsdesk.com"]
-  spec.summary       = %q{Parse social media profile username and provider}
+  spec.summary       = %q{Parse social media attributes from url or construct url from attributes}
   spec.homepage      = "http://devcorner.mynewsdesk.com"
   spec.license       = "MIT"
 
