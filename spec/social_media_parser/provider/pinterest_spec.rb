@@ -7,7 +7,7 @@ describe SocialMediaParser do
     let(:profile_attributes) { {url: "https://pinterest.com/fallontonight"} }
 
     it "returns a Pinterest object" do
-      expect(parser).to be_a SocialMediaParser::SocialMedia::Pinterest
+      expect(parser).to be_a SocialMediaParser::Provider::Pinterest
     end
   end
 

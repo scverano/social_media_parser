@@ -1,8 +1,8 @@
-require 'social_media_parser/social_media/provider'
+require 'social_media_parser/provider/base'
 
 module SocialMediaParser
-  module SocialMedia
-    class Twitter < Provider
+  module Provider
+    class Twitter < Base
       URL_REGEX = /(?:(?:http|https):\/\/)?(?:www.)?twitter.com\/(?:(?:\w)*#!\/)?(\w*)/i
 
       def provider

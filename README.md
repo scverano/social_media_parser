@@ -22,7 +22,7 @@ Or install it yourself as:
 
 ```
 parser = SocialMediaParser.parse "https://www.facebook.com/teamcoco"
-=> #<SocialMediaParser::SocialMedia::Facebook:0x007fe014ef0f78 @url="https://www.facebook.com/teamcoco">
+=> #<SocialMediaParser::Provider::Facebook:0x007fe014ef0f78 @url="https://www.facebook.com/teamcoco">
 
 parser.username
 => "teamcoco"

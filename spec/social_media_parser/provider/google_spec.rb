@@ -7,7 +7,7 @@ describe SocialMediaParser do
     let(:profile_attributes) { {url: "https://plus.google.com/+TeamCoco"} }
 
     it "returns a Google object" do
-      expect(parser).to be_a SocialMediaParser::SocialMedia::Google
+      expect(parser).to be_a SocialMediaParser::Provider::Google
     end
   end
 

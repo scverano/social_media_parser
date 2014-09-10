@@ -7,7 +7,7 @@ describe SocialMediaParser do
     let(:profile_attributes) { {url: "https://github.com/mynewsdesk"} }
 
     it "returns a Github object" do
-      expect(parser).to be_a SocialMediaParser::SocialMedia::Github
+      expect(parser).to be_a SocialMediaParser::Provider::Github
     end
   end
 

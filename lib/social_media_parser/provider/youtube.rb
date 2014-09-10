@@ -1,8 +1,8 @@
-require 'social_media_parser/social_media/provider'
+require 'social_media_parser/provider/base'
 
 module SocialMediaParser
-  module SocialMedia
-    class Youtube < Provider
+  module Provider
+    class Youtube < Base
       URL_REGEX = /(?:(?:http|https):\/\/)?(?:www.)?youtube\.com\/(?:user\/)([\w\-\.]{1,})/i
 
       def provider

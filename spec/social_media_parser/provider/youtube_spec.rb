@@ -7,7 +7,7 @@ describe SocialMediaParser do
     let(:profile_attributes) { {url: "https://www.youtube.com/user/TeamCoco"} }
 
     it "returns a Youtube object" do
-      expect(parser).to be_a SocialMediaParser::SocialMedia::Youtube
+      expect(parser).to be_a SocialMediaParser::Provider::Youtube
     end
   end
 

@@ -1,8 +1,8 @@
-require 'social_media_parser/social_media/provider'
+require 'social_media_parser/provider/base'
 
 module SocialMediaParser
-  module SocialMedia
-    class Facebook < Provider
+  module Provider
+    class Facebook < Base
       URL_REGEX = /(?:(?:http|https):\/\/)?(?:www.)?facebook.com\/(?:(?:\w)*#!\/)?(?:pages\/[\w\-]*)?(?:[?\d\-]*\/)?(?:profile.php\?id=(?=\d.*))?([\w\-\.]*)?/i
 
       def provider
