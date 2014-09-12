@@ -23,7 +23,7 @@ Or install it yourself as:
 
 ## Usage
 
-```
+```ruby
 parser = SocialMediaParser.parse "https://www.facebook.com/teamcoco"
 => #<SocialMediaParser::Provider::Facebook:0x007fe014ef0f78 @url="https://www.facebook.com/teamcoco">
 
@@ -39,8 +39,13 @@ parser.url
 
 `SocialMediaParser#parse` accepts either a url string or a hash, that accepts
 
-```
-{username: "teamcoco", provider: "facebook", url: "https://www.facebook.com/teamcoco", url_or_username: "teamcoco"}
+```ruby
+{
+  username: "teamcoco",
+  provider: "facebook",
+  url: "https://www.facebook.com/teamcoco",
+  url_or_username: "teamcoco"
+ }
 ```
 
 The `url_or_username` option can be used when you're not sure of the input, like the screenshot below for instance. This gem is built to take user input directly.
@@ -50,7 +55,7 @@ The `url_or_username` option can be used when you're not sure of the input, like
 
 If the input provided isn't enough for SocialMediaParser to figure out which provider it is, it returns a `SocialMediaParser::Link` object instead.
 
-```
+```ruby
 link = SocialMediaParser.parse "www.ruby-lang.org/en/"
 => #<SocialMediaParser::Link:0x007fe014fd8350 @url="https://www.ruby-lang.org/en/">
 
