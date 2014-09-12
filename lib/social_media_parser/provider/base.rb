@@ -1,13 +1,13 @@
 require 'social_media_parser/link'
 
 module SocialMediaParser
-  module SocialMedia
-    class Provider < ::SocialMediaParser::Link
+  module Provider
+    class Base < ::SocialMediaParser::Link
       PROVIDERS = ['facebook', 'github', 'google', 'instagram', 'pinterest', 'twitter', 'youtube']
 
       def self.parse(attributes)
         PROVIDERS.map do |provider|
-          Object.const_get("SocialMediaParser").const_get("SocialMedia").const_get(provider.capitalize).new(attributes)
+          Object.const_get("SocialMediaParser").const_get("Provider").const_get(provider.capitalize).new(attributes)
         end.select(&:valid?).first or
         ::SocialMediaParser::Link.new(attributes)
       end

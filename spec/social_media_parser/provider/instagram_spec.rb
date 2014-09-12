@@ -7,7 +7,7 @@ describe SocialMediaParser do
     let(:profile_attributes) { {url: "https://instagram.com/jimmykimmellive"} }
 
     it "returns a Instagram object" do
-      expect(parser).to be_a SocialMediaParser::SocialMedia::Instagram
+      expect(parser).to be_a SocialMediaParser::Provider::Instagram
     end
   end
 
